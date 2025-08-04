@@ -8,34 +8,20 @@ use App\Models\LoaidetaiModel;
 use App\Models\KinhphiModel;
 use App\Models\DetaiModel;
 use App\Models\TiendoModel;
+use App\Models\ThongtincanhanModel;
 use App\Models\ThanhvienModel;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
 class DetaiController extends Controller
 {
-    //controller Giao diện
-    function view() {}
-    // controller Backend
     public function DangkyDetai(DetaiRequest $request)
     {
-        $user = auth()->user();
-        $ttcn = $user->thongtincanhan;
-
-        if (!$ttcn) {
-            Log::warning('Không có thông tin cá nhân. Gán tạm id_ttcn = user_id', ['user_id' => $user->id]);
-            // return response()->json([
-            //     'message' => 'Không tìm thấy thông tin cá nhân.',
-            // ], 404);
-            $id_ttcn = $user->id;
-        } else {
-            $id_ttcn = $ttcn->id_ttcn;
-        }
 
         if (!$this->kiemTraDK($request)) {
             Log::debug('Không đáp ứng điều kiện đăng ký đề tài', [
                 'request' => $request->all(),
-                'user_id' => $user->id,
+                'user_id' => $request->input('id_nguoidung'),
             ]);
             return response()->json([
                 'message' => 'Không đáp ứng điều kiện đăng ký đề tài',
@@ -44,13 +30,13 @@ class DetaiController extends Controller
 
         DB::beginTransaction();
         try {
-            Log::debug('Bắt đầu tạo đề tài', [
-                'user_id' => $user->id,
+            Log::debug('Bắt đầu tạo đề tài',  [
+                'user_id' => $request->input('id_nguoidung'),
                 'payload' => $request->all()
             ]);
-
+            $id_ttcn = ThongtincanhanModel::find($request->input('id_nguoidung'));
             $detai = DetaiModel::create([
-                'id_ttcn'      => 1,
+                'id_ttcn'      => $id_ttcn,
                 'id_lvnc'      => $request->input('linhvuc'),
                 'id_loaidt'    => $request->input('loaidetai'),
                 'tendetai'     => $request->input('tendetai'),
@@ -65,9 +51,7 @@ class DetaiController extends Controller
                 'diemanhgia'   => null,
                 'nhanxet'      => null,
             ]);
-
             Log::debug('Đã tạo đề tài', ['id_detai' => $detai->id_detai]);
-
             foreach ($request->input('thanhvien', []) as $tv) {
                 ThanhvienModel::create([
                     'id_detai'       => $detai->id_detai,
@@ -109,6 +93,7 @@ class DetaiController extends Controller
             Log::debug('Hoàn tất');
 
             return response()->json([
+                'success' => true,
                 'message' => 'Đăng ký đề tài thành công!',
                 // 'data' => $detai
             ], 201);
@@ -121,6 +106,7 @@ class DetaiController extends Controller
             ]);
 
             return response()->json([
+                'success' => false,
                 'message' => 'Lỗi khi đăng ký đề tài',
                 'error' => $e->getMessage()
             ], 500);
@@ -157,4 +143,5 @@ class DetaiController extends Controller
         }
         return true;
     }
+    /*Thao tác với đề tài */
 }

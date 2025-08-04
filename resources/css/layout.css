@@ -1,0 +1,75 @@
+:root {
+    --primary-blue: #0f62ac;
+    --primary-green: #00a859;
+    --light-blue: #e6f2ff;
+    --light-green: #e6f7ed;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f8f9fa;
+}
+
+.navbar {
+    background-color: var(--primary-blue);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar {
+    background-color: white;
+    min-height: calc(100vh - 56px);
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar .nav-link {
+    color: #333;
+    border-radius: 5px;
+    margin-bottom: 5px;
+}
+
+.sidebar .nav-link:hover,
+.sidebar .nav-link.active {
+    background-color: var(--light-blue);
+    color: var(--primary-blue);
+}
+
+.sidebar .nav-link i {
+    margin-right: 10px;
+    color: var(--primary-blue);
+}
+
+.main-content {
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+}
+
+.footer {
+    background-color: var(--primary-blue);
+    color: white;
+    padding: 15px 0;
+}
+
+.btn-primary {
+    background-color: var(--primary-blue);
+    border-color: var(--primary-blue);
+}
+
+.btn-success {
+    background-color: var(--primary-green);
+    border-color: var(--primary-green);
+}
+
+.card-header {
+    background-color: var(--primary-blue);
+    color: white;
+}
+
+.badge-primary {
+    background-color: var(--primary-blue);
+}
+
+.badge-success {
+    background-color: var(--primary-green);
+}

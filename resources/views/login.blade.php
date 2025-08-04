@@ -16,7 +16,7 @@
     <div class="login-container">
         <div class="login-form">
             <div class="logo">
-                <img src="{{ asset('images/logo.png') }}" alt="Logo">
+                <img src="{{asset('images/logo.png')}}" alt="Logo">
             </div>
 
             <h2>Đăng nhập hệ thống</h2>
@@ -25,7 +25,6 @@
                 <i class="fas fa-exclamation-circle me-2"></i>
                 <span id="error-text"></span>
             </div>
-
             <div id="login-form">
                 <div class="form-group">
                     <label for="email">Email</label>
@@ -36,7 +35,6 @@
                     </div>
                     <span class="text-danger" id="email-error"></span>
                 </div>
-
                 <div class="form-group">
                     <label for="password">Mật khẩu</label>
                     <div class="input-with-icon">

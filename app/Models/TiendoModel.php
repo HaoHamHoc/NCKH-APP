@@ -26,6 +26,6 @@ class TiendoModel extends Model
     }
     public function Kinhphi()
     {
-        return $this->hasMany(KinhphiModel::class, 'id_kp', 'id_tiendo');
+        return $this->hasMany(KinhphiModel::class, 'id_tiendo', 'id_tiendo');
     }
 }

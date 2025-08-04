@@ -15,6 +15,7 @@ class DetaiModel extends Model
         'id_lvnc',
         'id_loaidt',
         'tendetai',
+        'sothang',
         'hotenCN',
         'donvi',
         'sodt',

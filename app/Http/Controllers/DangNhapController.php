@@ -50,12 +50,19 @@ class DangNhapController extends Controller
                         'redirect' => '/quanlyhethong/trangquanly'
                     ]);
                 }
+                if ($user->permission === 'user') {
+                    Auth::login($user);
+                    $request->session()->regenerate();
+                    return response()->json([
+                        'success' => true,
+                        'redirect' => '/detainckh'
+                    ]);
+                }
                 return response()->json([
                     'success' => true,
                     'redirect' => '/'
                 ]);
             }
-
             Log::warning('Đăng nhập thất bại', ['reason' => 'Email hoặc mật khẩu không đúng']);
             return response()->json([
                 'success' => false,
@@ -79,5 +86,12 @@ class DangNhapController extends Controller
                 'email' => 'Đã xảy ra lỗi hệ thống. Vui lòng thử lại sau.',
             ]);
         }
+    }
+    public function Dangxuat(Request $request)
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect('/trangdangnhap');
     }
 }
