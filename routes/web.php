@@ -5,6 +5,7 @@ use App\Http\Controllers\DetaiController;
 use App\Http\Controllers\DangNhapController;
 use App\Http\Controllers\GiaodienQLController;
 use App\Http\Controllers\GiaodienNguoiDungController;
+use App\Http\Controllers\SanphamnghiencuuController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -31,6 +32,8 @@ Route::get('/trangdangnhap', [GiaodienNguoiDungController::class, 'TrangDangnhap
 Route::get('/admin/trangquanly', [GiaodienQLController::class, 'dashboardAdmin']);
 // giao diện quản lý hệ thống
 Route::get('/quanlyhethong/trangquanly', [GiaodienQLController::class, 'dashboardQL']);
+// giao diện quản lý sản phẩm nghiên cứu
+Route::get('/sanphamnghiencuu', [SanphamnghiencuuController::class, 'index']);
 
 //Đề tài
 route::post('/pdangkydetai', [DetaiController::class, 'DangkyDetai']);
