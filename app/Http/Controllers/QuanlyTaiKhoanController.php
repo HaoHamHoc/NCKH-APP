@@ -36,12 +36,13 @@ class QuanlyTaiKhoanController extends Controller
         ], 201);
     }
 
-    public function Danhsachtaikhoan()
+    public function Danhsachtaikhoan(Request $request)
     {
+        $layout = $request->query('layout', 'table'); // mặc định là table nếu không truyền
         $taikhoans = User::leftJoin('thongtincanhan', 'users.id', '=', 'thongtincanhan.user_id')
             ->select('users.*', 'thongtincanhan.hovaten', 'thongtincanhan.dvcongtac')
             ->get();
-        return view('qlDashbroard.qlTaikhoan', compact('taikhoans'));
+        return view('qlDashbroard.qlTaikhoan', compact('taikhoans', 'layout'));
     }
 
     public function update(Request $request)

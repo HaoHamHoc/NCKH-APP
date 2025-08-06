@@ -7,7 +7,7 @@
         <button id="btn-table" class="btn btn-outline-primary btn-sm me-2"><i class="fas fa-table"></i> Dạng bảng</button>
         <button id="btn-grid" class="btn btn-outline-secondary btn-sm"><i class="fas fa-th"></i> Dạng lưới</button>
     </div>
-    <div id="view-table">
+    <div id="view-table" style="display: {{ $layout == 'table' ? '' : 'none' }};">
         <div class="table-responsive">
             <table class="table table-bordered table-hover align-middle">
                 <thead class="table-dark">
@@ -70,7 +70,7 @@
             </table>
         </div>
     </div>
-    <div id="view-grid" style="display:none;">
+    <div id="view-grid" style="display: {{ $layout == 'grid' ? '' : 'none' }};">
         <div class="row">
             @foreach($taikhoans as $user)
             <div class="col-md-4 mb-4">
@@ -129,6 +129,24 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
+    // Lưu layout vào localStorage khi chuyển đổi
+    document.getElementById('btn-table').onclick = function() {
+        localStorage.setItem('layout', 'table');
+        window.location.search = '?layout=table';
+    };
+    document.getElementById('btn-grid').onclick = function() {
+        localStorage.setItem('layout', 'grid');
+        window.location.search = '?layout=grid';
+    };
+    // Nếu không có parameter, tự động lấy từ localStorage
+    const params = new URLSearchParams(window.location.search);
+    if (!params.has('layout')) {
+        const layout = localStorage.getItem('layout');
+        if (layout === 'grid' || layout === 'table') {
+            window.location.search = '?layout=' + layout;
+        }
+    }
+
     // Bảng
     document.querySelectorAll('.btn-edit-row').forEach(function(btn) {
         btn.addEventListener('click', function(e) {
@@ -189,5 +207,3 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 </script>
-
-@vite(['resources/js/convertLayout.js'])
