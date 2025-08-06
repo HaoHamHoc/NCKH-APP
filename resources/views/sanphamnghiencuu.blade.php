@@ -1,4 +1,4 @@
-@extends('layout.app')
+@extends('layoutAdmin.app')
 
 @section('content')
 <div class="main-content container mt-4">
@@ -7,59 +7,6 @@
         <button id="btn-table" class="btn btn-outline-primary btn-sm me-2"><i class="fas fa-table"></i> Dạng bảng</button>
         <button id="btn-grid" class="btn btn-outline-secondary btn-sm"><i class="fas fa-th"></i> Dạng lưới</button>
     </div>
-    @php
-        $sanphams = [
-            [
-                'ten' => 'Thiết bị đo nhiệt độ thông minh',
-                'loai' => 'Thiết bị',
-                'nam' => 2024,
-                'tacgia' => 'Nguyễn Văn A',
-                'trangthai' => ['label' => 'Đã nghiệm thu', 'class' => 'bg-success'],
-            ],
-            [
-                'ten' => 'Phần mềm quản lý sinh viên',
-                'loai' => 'Phần mềm',
-                'nam' => 2023,
-                'tacgia' => 'Trần Thị B',
-                'trangthai' => ['label' => 'Đang thực hiện', 'class' => 'bg-warning text-dark'],
-            ],
-            [
-                'ten' => 'Báo cáo nghiên cứu thị trường',
-                'loai' => 'Báo cáo',
-                'nam' => 2022,
-                'tacgia' => 'Lê Văn C',
-                'trangthai' => ['label' => 'Chưa nghiệm thu', 'class' => 'bg-secondary'],
-            ],
-             [
-                'ten' => 'Báo cáo nghiên cứu thị trường',
-                'loai' => 'Báo cáo',
-                'nam' => 2022,
-                'tacgia' => 'Lê Văn C',
-                'trangthai' => ['label' => 'Chưa nghiệm thu', 'class' => 'bg-secondary'],
-            ],
-            [
-                'ten' => 'Báo cáo nghiên cứu thị trường',
-                'loai' => 'Báo cáo',
-                'nam' => 2022,
-                'tacgia' => 'Lê Văn C',
-                'trangthai' => ['label' => 'Chưa nghiệm thu', 'class' => 'bg-secondary'],
-            ],
-            [
-                'ten' => 'Báo cáo nghiên cứu thị trường',
-                'loai' => 'Báo cáo',
-                'nam' => 2022,
-                'tacgia' => 'Lê Văn C',
-                'trangthai' => ['label' => 'Chưa nghiệm thu', 'class' => 'bg-secondary'],
-            ],
-            [
-                'ten' => 'Báo cáo nghiên cứu thị trường',
-                'loai' => 'Báo cáo',
-                'nam' => 2022,
-                'tacgia' => 'Lê Văn C',
-                'trangthai' => ['label' => 'Chưa nghiệm thu', 'class' => 'bg-secondary'],
-            ],
-        ];
-    @endphp
     <div id="view-table">
         <div class="table-responsive">
             <table class="table table-bordered table-hover align-middle">

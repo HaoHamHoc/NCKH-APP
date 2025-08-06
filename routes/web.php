@@ -6,6 +6,7 @@ use App\Http\Controllers\DangNhapController;
 use App\Http\Controllers\GiaodienQLController;
 use App\Http\Controllers\GiaodienNguoiDungController;
 use App\Http\Controllers\SanphamnghiencuuController;
+use App\Http\Controllers\QuanlyTaiKhoanController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -38,8 +39,11 @@ Route::get('/admin/trangquanly', [GiaodienQLController::class, 'dashboardAdmin']
 // giao diện quản lý hệ thống
 Route::get('/quanlyhethong/trangquanly', [GiaodienQLController::class, 'dashboardQL']);
 // giao diện quản lý sản phẩm nghiên cứu
-Route::get('/sanphamnghiencuu', [SanphamnghiencuuController::class, 'index']);
-
+Route::get('/quanlyhethong/sanphamnghiencuu', [SanphamnghiencuuController::class, 'index']);
+// giao diện quản lý sản phẩm nghiên cứu
+Route::get('/quanlyhethong/taikhoan', [QuanlyTaiKhoanController::class, 'Danhsachtaikhoan']);
+Route::post('/quanlyhethong/taikhoan/update', [QuanlyTaiKhoanController::class, 'update'])->name('updateTaiKhoan');
+Route::post('/quanlyhethong/taikhoan/delete', [QuanlyTaiKhoanController::class, 'delete'])->name('deleteTaiKhoan');
 
 /*
 | Backend route post---------------------------------------------
