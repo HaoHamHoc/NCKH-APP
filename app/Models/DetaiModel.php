@@ -20,6 +20,7 @@ class DetaiModel extends Model
         'donvi',
         'sodt',
         'email',
+        'tgnghiemthu',
         'tgbatdau',
         'tgketthuc',
         'sogiotg',
@@ -33,13 +34,13 @@ class DetaiModel extends Model
     {
         return $this->belongsTo(ThongtincanhanModel::class, 'id_ttcn');
     }
-    public function Lichvucnghiencuu()
+    public function Linhvucnghiencuu()
     {
-        return $this->belongsTo(LinhvucnghiencuuModel::class, 'id_lvnc');
+        return $this->belongsTo(LinhvucnghiencuuModel::class, 'id_lvnc', 'id_lvnc');
     }
     public function LoaiDT()
     {
-        return $this->belongsTo(LoaidetaiModel::class, 'id_loaidt');
+        return $this->belongsTo(LoaidetaiModel::class, 'id_loaidt', 'id_loaidt');
     }
     //------------------//
     public function KinhPhi()

@@ -109,6 +109,13 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
+                                    <label for="sothang">Số Tháng</label>
+                                    <input type="number" class="form-control" id="sothang" name="sothang" min="1"
+                                        placeholder="Ví dụ: 8 Tháng" required>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
                                     <label for="Trangthai">Trạng thái</label>
                                     <select class="form-control" id="Trangthai" name="Trangthai" required>
                                         <option value="Chờ duyệt" selected>Chờ duyệt</option>
@@ -223,14 +230,19 @@
                     <div class="col-md-3">
                         <div class="form-group">
                             <label>Người thực hiện</label>
-                            <input type="text" class="form-control" name="tiendo[][nguoithuchien]" required>
-                            <div class="invalid-feedback">Vui lòng nhập người thực hiện</div>
+                            <select class="form-control" name="tiendo[][nguoithuchien]" required>
+                                <option value="Tác giả" selected>Tác giả</option>
+                                <option value="Tác giả và các thành viên">Tác giả và thành viên</option>
+                                <option value="Các thành viên">Thành viên</option>
+                            </select>
+                            <div class="invalid-feedback">Vui lòng chọn người thực hiện</div>
                         </div>
                     </div>
                     <div class="col-md-2">
                         <div class="form-group">
                             <label>Tháng thực hiện</label>
-                            <input type="month" class="form-control" name="tiendo[][thang]" required>
+                            <input type="text" class="form-control" name="tiendo[][thang]" placeholder="Tháng 9 - Tháng 10"
+                                required>
                         </div>
                     </div>
                     <div class="col-md-2">
@@ -323,13 +335,13 @@
         </div>
     </template>
     <script id="user-data" type="application/json">
-                @auth                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   {!! json_encode([
-                        'name' => auth()->user()->name,
-                        'email' => auth()->user()->email,
-                        'id' => auth()->user()->id
-                    ]) !!}
-                @else
-                    null
-                @endauth
-                </script>
+    @auth                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   {!! json_encode([
+            'name' => auth()->user()->name,
+            'email' => auth()->user()->email,
+            'id' => auth()->user()->id
+        ]) !!}
+    @else
+        null
+    @endauth
+    </script>
 @endsection

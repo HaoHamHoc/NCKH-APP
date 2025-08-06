@@ -1,4 +1,4 @@
-export function initTopicRegistration() {
+export function DangKyDeTai() {
     // Lấy dữ liệu người dùng
     const userDataElement = document.getElementById('user-data');
     const userData = userDataElement ? JSON.parse(userDataElement.textContent) : null;
@@ -21,8 +21,14 @@ export function initTopicRegistration() {
     const alertBox = document.createElement('div');
     alertBox.className = 'alert';
     alertBox.style.display = 'none';
-    alertBox.style.margin = '0 0 20px 0';
-    form?.parentNode.insertBefore(alertBox, form);
+    alertBox.style.margin = '20px 0';
+    // Chèn alertBox vào trước nút đăng ký
+    const submitBtn = form?.querySelector('button[type="submit"]');
+    if (submitBtn) {
+        submitBtn.parentNode.insertBefore(alertBox, submitBtn);
+    } else {
+        form?.parentNode.insertBefore(alertBox, form);
+    }
 
     // Hiển thị thông báo
     function showAlert(type, message) {
@@ -32,7 +38,7 @@ export function initTopicRegistration() {
 
         setTimeout(() => {
             alertBox.style.display = 'none';
-        }, 5000);
+        }, 20000);
     }
 
     // Variables
@@ -82,26 +88,21 @@ export function initTopicRegistration() {
         tienDoContainer.appendChild(template);
         progressCount++;
     });
-
-    // Remove progress
     tienDoContainer?.addEventListener('click', function (e) {
         if (e.target.classList.contains('btn-xoa-tiendo')) {
             e.target.closest('.tien-do-item').remove();
         }
     });
-
-    // Add cost to progress
     document.addEventListener('click', function (e) {
         if (e.target.classList.contains('btn-them-kinhphi')) {
             const container = e.target.closest('.kinh-phi-section').querySelector('.kinh-phi-container');
             const template = document.getElementById('kinhPhiTemplate').content.cloneNode(true);
             const parentIndex = Array.from(document.querySelectorAll('.tien-do-item')).indexOf(e.target.closest('.tien-do-item'));
-
+            const costIndex = container.querySelectorAll('.kinh-phi-item').length;
             const inputs = template.querySelectorAll('[name]');
             inputs.forEach(input => {
-                input.name = input.name.replace('[]', `[${parentIndex}][]`);
+                input.name = input.name.replace('[]', `[${parentIndex}]`).replace('[]', `[${costIndex}]`);
             });
-
             container.appendChild(template);
         }
     });
@@ -112,7 +113,6 @@ export function initTopicRegistration() {
             e.target.closest('.kinh-phi-item').remove();
         }
     });
-
     // Calculate cost total
     document.addEventListener('input', function (e) {
         if (e.target.classList.contains('soluong-kinhphi') || e.target.classList.contains('dongia-kinhphi')) {
@@ -155,7 +155,9 @@ export function initTopicRegistration() {
             if (!response.ok) {
                 throw new Error(data.message || 'Có lỗi xảy ra khi gửi dữ liệu');
             }
-
+            if (data.success === false) {
+                showAlert('danger', data.message);
+            }
             // Hiển thị thông báo thành công
             showAlert('success', data.message || 'Đăng ký đề tài thành công!');
 

@@ -3,9 +3,9 @@
 @section('title', 'Đề tài cá nhân')
 
 @section('content')
-    <div class="main-content">
+    @vite(['resources/js/pages/detaicanhan.js'])
+    <div class="main-content" id="trangdetaicanhan">
         <h2 class="mb-4">Đề tài cá nhân</h2>
-
         <div class="border-start border-4 border-primary ps-3 py-2 mb-3 bg-light fw-bold">
             Đề tài đang thực hiện
         </div>
@@ -72,6 +72,10 @@
                 <div class="alert alert-info">Không có thành viên nào.</div>
             @endif
             <div class="border-start border-4 border-primary ps-3 py-2 mb-3 bg-light fw-bold">
+                Hội đồng
+            </div>
+            <div class="alert alert-info">Chưa có hội đồng</div>
+            <div class="border-start border-4 border-primary ps-3 py-2 mb-3 bg-light fw-bold">
                 Tiến độ thực hiện
             </div>
             @forelse ($tiendo as $td)
@@ -82,11 +86,10 @@
                                 <strong>Công việc:</strong> {{ $td->ndcongviec }}
                             </div>
                             <div>
-                                <span
-                                    class="badge 
-                                                                                                                                                                                                                                                    @if($td->trangthai == 'Hoàn thành') bg-success 
-                                                                                                                                                                                                                                                    @elseif($td->trangthai == 'Đang thực hiện') bg-warning 
-                                                                                                                                                                                                                                                    @else bg-secondary @endif">
+                                <span class="badge 
+                            @if($td->trangthai == 'Hoàn thành') bg-success 
+                            @elseif($td->trangthai == 'Đang thực hiện') bg-warning 
+                            @else bg-secondary @endif">
                                     {{ $td->trangthai }}
                                 </span>
                             </div>
@@ -97,7 +100,13 @@
                             -
                             {{ \Carbon\Carbon::parse($td->tgketthuc)->format('d/m/Y') }}
                         </p>
-                        <h5>Kinh phí liên quan:</h5>
+                        <div class="d-flex align-items-center mb-2">
+                            <h5 class="mb-0 me-2">Kinh phí liên quan:</h5>
+                            <button class="btn btn-sm btn-outline-success py-0 px-1 toggle-kinhphi-form"
+                                data-id="{{ $td->id_tiendo }}">
+                                <i class="fas fa-plus"></i> Thêm kinh phí
+                            </button>
+                        </div>
                         @if($td->Kinhphi->count() > 0)
                             <table class="table table-bordered table-sm">
                                 <thead class="table-light">
@@ -122,7 +131,7 @@
                                                 <a href="#" class="btn btn-sm py-0 px-1 btn-outline-primary"><i class="fas fa-edit"></i>
                                                     Sửa</a>
                                                 <button type="button" class="btn btn-sm py-0 px-1 btn-outline-danger"
-                                                    onclick="if(confirm('Bạn có chắc muốn xoá?')){/* Xử lý xoá */}"><i
+                                                    onclick="deleteKinhPhi('{{ $kp->id_kp }}', '{{ $td->id_detai }}', '{{ $td->id_tiendo }}')"><i
                                                         class="fas fa-trash"></i> Xoá</button>
                                             </td>
                                         </tr>
@@ -133,13 +142,41 @@
                             <p class="text-muted">Không có kinh phí nào.</p>
                         @endif
                     </div>
+                    <!-- Form thêm kinh phí (ẩn ban đầu) -->
+                    <div class="kinhphi-form-container mb-3 ms-3" id="form-{{ $td->id_tiendo }}" style="display: none;">
+                        <form class="form-kinhphi" data-id="{{ $td->id_tiendo }}">
+                            @csrf
+                            <div class="row g-2">
+                                <input type="hidden" name="id_detai" value="{{ $td->id_detai }}">
+                                <div class="col"><input type="text" name="ctkhoanchi" class="form-control"
+                                        placeholder="Chi tiết khoản chi" required></div>
+                                <div class="col"><input type="text" name="donvitinh" class="form-control" placeholder="Đơn vị tính"
+                                        required></div>
+                                <div class="col"><input type="number" name="soluong" class="form-control" placeholder="Số lượng"
+                                        required>
+                                </div>
+                                <div class="col"><input type="number" name="dongia" class="form-control" placeholder="Đơn giá"
+                                        required>
+                                </div>
+                                <div class="col"><input type="number" name="thanhtien" class="form-control" placeholder="Thành tiền"
+                                        required></div>
+                                <div class="col">
+                                    <button type="submit" class="btn btn-sm btn-primary">Lưu</button>
+                                    <button type="button" class="btn btn-sm btn-secondary btn-cancel"
+                                        data-id="{{ $td->id_tiendo }}">Huỷ</button>
+                                </div>
+                            </div>
+                        </form>
+                        <div id="msg-{{ $td->id_tiendo }}"></div>
+                    </div>
                 </div>
+
             @empty
                 <div class="alert alert-info">Không có tiến độ nào.</div>
             @endforelse
         @else
             <div class="alert alert-info" role="alert">
-                Bạn chưa đăng ký đề tài nào.
+                Bạn chưa có đề tài được duyệt.
             </div>
         @endif
     </div>

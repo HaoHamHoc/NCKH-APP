@@ -17,8 +17,8 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="">
-                    <i class="fas fa-file-alt"></i>Đề tài tham gia
+                <a class="nav-link" href="/quanlydetai">
+                    <i class="fas fa-file-alt"></i>Quản lý đề tài
                 </a>
             </li>
         </ul>

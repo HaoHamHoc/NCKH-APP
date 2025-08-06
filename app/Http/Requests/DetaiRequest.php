@@ -68,6 +68,7 @@ class DetaiRequest extends FormRequest
             'TGbatdau' => 'required|date_format:Y-m-d',
             'TGketthuc' => 'required|date_format:Y-m-d|after:TGbatdau',
             'Sogiotacgia' => 'required|numeric|min:0',
+            'sothang' => 'required|numeric|min:0',
             'Trangthai' => 'required|string',
 
             'thanhvien' => 'nullable|array',
@@ -77,6 +78,7 @@ class DetaiRequest extends FormRequest
             'tiendo' => 'nullable|array',
             'tiendo.*.ndcongviec' => 'required|string',
             'tiendo.*.nguoithuchien' => 'required|string',
+            'tiendo.*.thang' => 'required|string',
             'tiendo.*.Tgbatdaucv' => 'nullable|date_format:Y-m-d',
             'tiendo.*.Tgketthuccv' => 'nullable|date_format:Y-m-d|after_or_equal:tiendo.*.Tgbatdaucv',
 

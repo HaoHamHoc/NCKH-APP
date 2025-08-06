@@ -1,6 +1,6 @@
 @extends('layout.app')
 
-@section('title', 'Trang chủ')
+@section('title', 'Thông tin cá nhân')
 
 @section('content')
     <div class="main-content">
