@@ -12,11 +12,10 @@ class SogiotheonamModel extends Model
     protected $primaryKey = 'id_nam';
     protected $fillable = [
         'id_loaidt',
-        'sogioNC',
+        'sogioTGtoida',
         'sogioTVtoida',
         'soTVtoida',
         'nam',
-        'sonam'
     ];
     public $timestamps = true;
     public function Loaidetai()
