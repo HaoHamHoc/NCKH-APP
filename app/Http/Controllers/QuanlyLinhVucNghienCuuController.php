@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\LinhvucnghiencuuModel;
 
-class QuanlyLinhVucNghienCuu extends Controller
+class QuanlyLinhVucNghienCuuController extends Controller
 {
     /**
      * Hiển thị danh sách lĩnh vực nghiên cứu

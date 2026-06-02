@@ -22,6 +22,7 @@ class SanphamModel extends Model
     {
         return $this->belongsTo(LoaispnghiencuuModel::class, 'id_loai');
     }
+
     public function Detai()
     {
         return $this->belongsTo(DetaiModel::class, 'id_detai');

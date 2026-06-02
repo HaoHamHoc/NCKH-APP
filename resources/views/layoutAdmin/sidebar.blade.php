@@ -18,13 +18,13 @@
             </li>
             
             <li class="nav-item">
-                <a class="nav-link {{ request()->is('quanlyhethong/loaidetai*') ? 'active' : '' }}" href="/quanlyhethong/loaidetai">
+                <a class="nav-link" href="/quanlyhethong/loaidetai">
                     <i class="fas fa-tags"></i>Quản lý Loại đề tài
                 </a>
             </li>
             
             <li class="nav-item">
-                <a class="nav-link {{ request()->is('quanlyhethong/sogiotheonam*') ? 'active' : '' }}" href="/quanlyhethong/sogiotheonam">
+                <a class="nav-link {{ request()->is('quanlyhethong/loaidetai*') ? 'active' : '' }}" href="/quanlyhethong/loaidetai">
                     <i class="fas fa-clock"></i>Quản lý Số giờ theo năm
                 </a>
             </li>

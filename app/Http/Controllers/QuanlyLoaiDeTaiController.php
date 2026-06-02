@@ -19,7 +19,7 @@ class QuanlyLoaiDeTaiController extends Controller {
         ];
         $items = LoaidetaiModel::all()->toArray();
 
-        $type = 'Quản lý loại đề tài';
+        $type = 'Quản lý số giờ theo năm';
         $updateRoute = 'updateLoaiDeTai';
         $deleteRoute = '';
         $addRoute = 'addLoaiDeTai'; // Đổi thành tên route tương ứng nếu có
